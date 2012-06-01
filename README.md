@@ -25,3 +25,4 @@ Todos
 * Add printing templates, so the user can select how the page for printing should look.
 * Add subtasks to print with the main task.
 * Add JQL support to print multiple tasks at once.
+* Add table of attachments which are not images

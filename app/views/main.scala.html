@@ -1,0 +1,31 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        
+        <script src="@routes.Assets.at("javascripts/jquery.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/bootstrap.min.js")" type="text/javascript"></script>
+         
+         
+    </head>
+    <body style="padding-top: 60px;">
+    
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">PlayJIRAPrint</a>
+        </div>
+      </div>
+    </div>
+    
+      <div class="container">
+        @content
+      </div>
+    </body>
+</html>

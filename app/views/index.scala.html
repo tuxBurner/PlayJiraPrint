@@ -1,0 +1,41 @@
+@(jiraForm: Form[forms.JiraForm])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Play Jira Print - Print your Tasks the good way ") {
+  
+   <div class="row">
+    
+     <div class="span12">
+       @form(routes.Application.showPrintableTask,'class -> "well") {
+         <fieldset>
+           <legend>Bitte Daten eingeben und der Task wird zum ausdrucken angezeigt !</legend>
+           
+           @if(jiraForm.hasGlobalErrors) { 
+            <p class="alert alert-error">
+             @jiraForm.globalError.message
+            </p>
+           }
+           
+           @if(flash.contains("error")) {
+             <p class="alert alert-error">
+               @flash.get("error")
+             </p>
+           }
+           
+            @inputText(jiraForm("url"),'_label -> "Jira Url:", '_showConstraints -> true, 'placeholder -> "Enter url for Jira")
+            @inputText(jiraForm("username"),'_label -> "Jira User:", '_showConstraints -> true, 'placeholder -> "Enter user for Jira")
+            @inputPassword(jiraForm("password"),'_label -> "Jira Password:", '_showConstraints -> true, 'placeholder -> "Enter password for Jira")
+            @inputText(jiraForm("task"),'_label -> "Jir Task:", '_showConstraints -> true, 'placeholder -> "Enter task for Jira") 
+           
+           <div class="form-actions">
+             <button type="submit" class="btn  btn-primary"><i class="icon-print icon-white"></i> Print</button>
+           </div>
+           
+         </fieldset>
+       } 
+     </div>
+   </div>
+    
+}

@@ -1,0 +1,87 @@
+@(jiraPrint: JiraPrintTask)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Play Jira Print - Print your Tasks the good way ") {
+  
+   <div class="row">
+    
+     <div class="span12">
+     
+       <div class="page-header">
+         <h1>@jiraPrint.issue.getKey <small>@jiraPrint.issue.getSummary</small></h1>
+       </div>
+       
+       <div class="row">
+         <h2>Info</h2>
+         <dl class="dl-horizontal">
+         <dt>Assignee:</dt> <dd>@jiraPrint.issue.getAssignee().getDisplayName() (@jiraPrint.issue.getAssignee().getName())</dd>
+         <dt>Reporter:</dt> <dd>@jiraPrint.issue.getReporter().getDisplayName() (@jiraPrint.issue.getReporter().getName())</dd>
+         <dt>Status:</dt> <dd>@jiraPrint.issue.getStatus().getName()</dd>
+         <dt>Priority:</dt> <dd>@jiraPrint.issue.getPriority().getName()</dd>
+         <dt>Creationdate:</dt> <dd>@jiraPrint.issue.getCreationDate()</dd>
+         @if(jiraPrint.issue.getResolution() != null) {
+           <dt>Resolution:</dt> <dd>@jiraPrint.issue.getResolution().getName()</dd>
+         }
+         </dl>
+       </div>
+       
+       <div class="row">
+         <h2>Description</h2>
+         <p>
+           @jiraPrint.issue.getDescription()
+         </p>
+       </div>
+       
+       @if(jiraPrint.images != null){
+         
+         <div class="row">
+           <h2>Images</h2>
+           <ul class="thumbnails">
+             
+             @for(image <- jiraPrint.images) {
+               <li class="span12">
+                 <div class="thumbnail">
+                   <img src="data:@image.attachment.getMimeType;base64,@image.base64Content" alt="" />
+                   <h5>@image.attachment.getFilename()</h5>
+                   <p>
+                     @image.attachment.getAuthor().getDisplayName() (@image.attachment.getAuthor().getName())<br />
+                     @image.attachment.getCreationDate()
+                   </p> 
+                 </div>
+              </li>
+            }
+            
+           </ul>
+         </div>
+       }
+       
+       @if(jiraPrint.comments != null) {
+         <div class="row">
+           <h2>Comments</h2>
+           
+             
+             @for(comment <- jiraPrint.comments) {
+               <div class="row">
+                 <div class="span5">
+                   <dl class="dl-horizontal">
+                     <dt>Author:</dt><dd>@comment.getAuthor().getDisplayName() (@comment.getAuthor().getName())</dd>
+                     <dt>Date:</dt><dd>@comment.getCreationDate()</dd>
+                   </dl>
+                 </div>
+                 <div class="span7">
+                   <p>@comment.getBody()</p>
+                 </div>
+               </div>
+            }
+            
+           
+         </div>
+       }
+     
+     </div>
+     
+   </div>
+    
+}
